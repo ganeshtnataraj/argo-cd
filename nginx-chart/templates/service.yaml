@@ -3,10 +3,11 @@ kind: Service
 metadata:
   name: {{ include "nginx-helm.fullname" . }}
 spec:
-  type: {{ .Values.service.type }}
+  type: NodePort
   selector:
     app: {{ include "nginx-helm.name" . }}
   ports:
-  - port: {{ .Values.service.port }}
-    targetPort: 80
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+      nodePort: {{ .Values.service.nodePort }}
 
